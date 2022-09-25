@@ -26,4 +26,4 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Contributors
 
-A list of contributors can be found in [CONTRIBUTORS.md]().
+A list of contributors can be found in [CONTRIBUTORS.md](CONTRIBUTORS.md).
