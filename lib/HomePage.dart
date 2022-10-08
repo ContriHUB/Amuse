@@ -1,6 +1,7 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:amuse/widgets/HomeCard.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,10 +14,18 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("AMUSE")),
-        body: ListView.builder(
-          itemCount: cardList.length,
-          itemBuilder: (context, index) => cardList[index],
+        appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              "AMUSE",
+              style: GoogleFonts.rubik(fontWeight: FontWeight.bold),
+            )),
+        body: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: ListView.builder(
+            itemCount: cardList.length,
+            itemBuilder: (context, index) => cardList[index],
+          ),
         ));
   }
 
