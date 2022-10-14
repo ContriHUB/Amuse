@@ -17,6 +17,21 @@ class _DictionaryState extends State<Dictionary> {
   bool _searched = false;
   bool _shouldFade = false;
 
+  Widget arrayToList(List array) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (String word in array) ...{
+          Text("  •  " + word.toString(),
+              style: Theme.of(context).textTheme.bodyMedium),
+          SizedBox(
+            height: 5,
+          ),
+        }
+      ],
+    );
+  }
+
   void lookupWord() async {
     setState(() {
       _searched = true;
@@ -76,21 +91,21 @@ class _DictionaryState extends State<Dictionary> {
             const SizedBox(
               height: 20,
             ),
-            Text(
-              'SYNONYMS ',
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            Text((_entry.synonyms.isEmpty) ? '-' : _entry.synonyms.toString(),
-                style: Theme.of(context).textTheme.bodyMedium),
+            if (_entry.synonyms.isNotEmpty)
+              Text(
+                'SYNONYMS ',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            if (_entry.synonyms.isNotEmpty) arrayToList(_entry.synonyms),
             const SizedBox(
               height: 20,
             ),
-            Text(
-              'ANTONYMS ',
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            Text((_entry.antonyms.isEmpty) ? '-' : _entry.antonyms.toString(),
-                style: Theme.of(context).textTheme.bodyMedium),
+            if (_entry.antonyms.isNotEmpty)
+              Text(
+                'ANTONYMS ',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            if (_entry.antonyms.isNotEmpty) arrayToList(_entry.antonyms),
           ],
         ),
       ),
