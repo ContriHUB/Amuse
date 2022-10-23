@@ -26,8 +26,11 @@ class _DoodleState extends State<Doodle> {
             const SizedBox(height: 32),
             const Text('DRAW WHAT YOU WANT!'),
             const SizedBox(height: 120),
-            const Expanded(
-              child: Draw(),
+            Expanded(
+              child: Draw(
+                strokeColor: _currentColor,
+                strokeWidth: _currentWidth,
+              ),
             ),
             const SizedBox(height: 32),
             Container(
