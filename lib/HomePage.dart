@@ -15,11 +15,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            centerTitle: true,
-            title: Text(
-              "AMUSE",
-              style: GoogleFonts.rubik(fontWeight: FontWeight.bold),
-            )),
+          centerTitle: true,
+          title: Image.asset(
+            "assets/images/AMUSE.png",
+            fit: BoxFit.contain,
+            height: 70,
+          ),
+          toolbarHeight: 80,
+        ),
         body: Padding(
           padding: const EdgeInsets.all(12.0),
           child: ListView.builder(
