@@ -1,5 +1,8 @@
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:amuse/HomePage.dart';
+import 'package:splashscreen/splashscreen.dart';
 
 class ThemeClass {
   static ThemeData lightTheme = ThemeData(
@@ -28,12 +31,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
       theme: ThemeClass.lightTheme,
       darkTheme: ThemeClass.darkTheme,
-      home: const HomePage(),
+      home: SplashScreenPage(),
+    );
+  }
+}
+
+class SplashScreenPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SplashScreen(
+      seconds: 5,
+      navigateAfterSeconds: const HomePage(),
+      backgroundColor: Color(0xFF2A2E30),
+      image: Image.asset(
+        "assets/images/AMUSE.png",
+        fit: BoxFit.contain,
+      ),
+      photoSize: 150.0,
+      loaderColor: Color.fromARGB(255, 126, 126, 126),
     );
   }
 }
