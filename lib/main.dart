@@ -4,16 +4,16 @@ import 'package:amuse/HomePage.dart';
 class ThemeClass {
   static ThemeData lightTheme = ThemeData(
       scaffoldBackgroundColor: Colors.white,
-      colorScheme: ColorScheme.light(),
-      appBarTheme: AppBarTheme(
+      colorScheme: const ColorScheme.light(),
+      appBarTheme: const AppBarTheme(
         backgroundColor: Colors.blue,
       ));
 
   static ThemeData darkTheme = ThemeData(
-      scaffoldBackgroundColor: Colors.black,
-      colorScheme: ColorScheme.dark(),
-      appBarTheme: AppBarTheme(
-        backgroundColor: Colors.black,
+      scaffoldBackgroundColor: Color(0xFF26282c),
+      colorScheme: const ColorScheme.dark(),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Color(0xFF26282c),
       ));
 }
 
