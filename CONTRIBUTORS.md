@@ -8,5 +8,5 @@ _Please only append lines to bottom of this file._
 4.[Kartik Dange](https://github.com/kartik83789)
 5. [Akash Kandadamy](https://akashk.vercel.app/)
 6. [Rahul Mokaria]()
-
+7. [Sejal]()
 
