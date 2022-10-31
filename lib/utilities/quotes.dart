@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:quoter/quoter.dart';
 import 'package:shake/shake.dart';
 
@@ -42,36 +43,42 @@ class _QuotesState extends State<Quotes> {
       appBar: AppBar(
         title: const Text('Quotes'),
       ),
-      body: Container(
-        margin: const EdgeInsets.all(10),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Expanded(
-                  child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Text(
-                      _quote?.quotation ??
-                          "Oh no! There seems to be some error. Please come back after a few minutes.",
-                      style: Theme.of(context).textTheme.headline4,
-                      textAlign: TextAlign.center,
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Container(
+          margin: const EdgeInsets.all(10),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: Text(
+                        _quote?.quotation ??
+                            "Oh no! There seems to be some error. Please come back after a few minutes.",
+                        // style: Theme.of(context).textTheme.headline4,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.contrailOne(fontSize: 30),
+                      ),
                     ),
+                    Text(
+                      _quote?.quotee ?? "",
+                      textAlign: TextAlign.right,
+                      style: GoogleFonts.contrailOne(),
+                    ),
+                  ],
+                )),
+                Center(
+                  child: Text(
+                    "Shake to generate new quote!",
+                    style: GoogleFonts.contrailOne(),
                   ),
-                  Text(
-                    _quote?.quotee ?? "",
-                    textAlign: TextAlign.right,
-                  ),
-                ],
-              )),
-              const Center(
-                child: Text(
-                  "Shake to generate new quote!",
                 ),
-              ),
-            ]),
+              ]),
+        ),
       ),
     );
   }
