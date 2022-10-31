@@ -12,6 +12,7 @@ class _UsernameState extends State<Username> {
   String _firstName = "";
   String _lastName = "";
   final List<String> _adj = [];
+  bool _random = false;
 
   var generator = UsernameGenerator();
   final _firstNameController = TextEditingController();
@@ -50,10 +51,18 @@ class _UsernameState extends State<Username> {
                     setState(() {
                       _firstName = _firstNameController.text;
                       _lastName = _lastNameController.text;
+                      _random = false;
                     });
                   },
                   child: const Text("Generate random username.")),
-              printUsername(_firstName, _lastName)
+              ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _random = true;
+                    });
+                  },
+                  child: const Text("Generate Without parameters")),
+              printUsername(_firstName, _lastName, _random)
             ],
           ),
         ),
@@ -61,15 +70,21 @@ class _UsernameState extends State<Username> {
     );
   }
 
-  Widget printUsername(String _firstName, String _lastName) {
+  Widget printUsername(String _firstName, String _lastName, bool random) {
     var _genUsername =
         generator.generateForName(_firstName, lastName: _lastName);
+
+    if (_random) {
+      var _genUsername = generator.generateRandom();
+      return Text(_genUsername);
+    }
     if (_firstName.isEmpty) {
       return const Text("First Name Cannot be Empty");
     }
     if (_lastName.isEmpty) {
       return const Text("Last Name Cannot be Empty");
     }
+
     return Text(
       "Your Generated Username: $_genUsername",
       style: const TextStyle(fontSize: 20),
