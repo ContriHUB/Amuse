@@ -13,5 +13,3 @@ _Please only append lines to bottom of this file._
 9. [Mehul Kaushal]()
 10. [Dennis Thomas](https://github.com/DNA5769)
 
-
-
