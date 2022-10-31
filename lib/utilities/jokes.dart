@@ -12,8 +12,11 @@ class Jokes extends StatefulWidget {
 
 class _JokesState extends State<Jokes> {
   String? _joke;
-
+  bool isLoading = true;
   _getJoke() async {
+    setState(() {
+      isLoading = true;
+    });
     var url = Uri.https('v2.jokeapi.dev', '/joke/Any', {
       'type': 'single',
       'blacklistFlags': ['nsfw', 'racist', 'sexist', 'explicit']
@@ -27,6 +30,7 @@ class _JokesState extends State<Jokes> {
 
       setState(() {
         _joke = jsonResponse['joke'];
+        isLoading = false;
       });
     } else {
       print('Request failed with status: ${response.statusCode}.');
@@ -57,33 +61,35 @@ class _JokesState extends State<Jokes> {
       appBar: AppBar(
         title: const Text('Jokes'),
       ),
-      body: Container(
-        margin: const EdgeInsets.all(10),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Expanded(
-                  child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Text(
-                      _joke ??
-                          "Oh no! There seems to be some error. Please come back after a few minutes.",
-                      style: Theme.of(context).textTheme.headline4,
-                      textAlign: TextAlign.center,
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : Container(
+              margin: const EdgeInsets.all(10),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Expanded(
+                        child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(
+                          child: Text(
+                            _joke ??
+                                "Oh no! There seems to be some error. Please come back after a few minutes.",
+                            style: Theme.of(context).textTheme.headline4,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    )),
+                    const Center(
+                      child: Text(
+                        "Shake to generate new joke!",
+                      ),
                     ),
-                  ),
-                ],
-              )),
-              const Center(
-                child: Text(
-                  "Shake to generate new joke!",
-                ),
-              ),
-            ]),
-      ),
+                  ]),
+            ),
     );
   }
 }
