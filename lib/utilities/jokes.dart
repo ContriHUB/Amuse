@@ -11,7 +11,8 @@ class Jokes extends StatefulWidget {
 }
 
 class _JokesState extends State<Jokes> {
-  String? _joke;
+  String _joke = "";
+  bool _isLoading = false;
 
   _getJoke() async {
     var url = Uri.https('v2.jokeapi.dev', '/joke/Any', {
@@ -19,7 +20,13 @@ class _JokesState extends State<Jokes> {
       'blacklistFlags': ['nsfw', 'racist', 'sexist', 'explicit']
     });
     // Await the http get response, then decode the json-formatted response.
+    setState(() {
+      _isLoading = true;
+    });
     var response = await http.get(url);
+    setState(() {
+      _isLoading = false;
+    });
     if (response.statusCode == 200) {
       var jsonResponse =
           convert.jsonDecode(response.body) as Map<String, dynamic>;
@@ -30,6 +37,9 @@ class _JokesState extends State<Jokes> {
       });
     } else {
       print('Request failed with status: ${response.statusCode}.');
+      setState(() {
+        _joke = "Oh no! There seems to be some error. Please come back after a few minutes.";
+      });
     }
   }
 
@@ -68,12 +78,11 @@ class _JokesState extends State<Jokes> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Center(
-                    child: Text(
-                      _joke ??
-                          "Oh no! There seems to be some error. Please come back after a few minutes.",
+                    child: !_isLoading ? Text(
+                      _joke,
                       style: Theme.of(context).textTheme.headline4,
                       textAlign: TextAlign.center,
-                    ),
+                    ) : const CircularProgressIndicator(),
                   ),
                 ],
               )),
