@@ -16,7 +16,7 @@ class _DoodleState extends State<Doodle> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Doodle'),
+        title: const Text('draw_your_image example'),
       ),
       body: SizedBox(
         height: double.infinity,
@@ -26,49 +26,45 @@ class _DoodleState extends State<Doodle> {
             const SizedBox(height: 32),
             const Text('DRAW WHAT YOU WANT!'),
             const SizedBox(height: 120),
-            const Expanded(
-              child: Draw(),
+            Expanded(
+              child: Draw(strokeColor: _currentColor,strokeWidth: _currentWidth,),
             ),
             const SizedBox(height: 32),
-            Container(
-              color: Colors.white,
-              padding: const EdgeInsets.all(10),
-              child: Wrap(
-                spacing: 16,
-                children: [
-                  Colors.black,
-                  Colors.blue,
-                  Colors.red,
-                  Colors.green,
-                  Colors.yellow
-                ].map(
-                  (color) {
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _currentColor = color;
-                        });
-                      },
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          width: 40,
-                          height: 40,
-                          color: color,
-                          child: Center(
-                            child: _currentColor == color
-                                ? const Icon(
-                                    Icons.brush,
-                                    color: Colors.white,
-                                  )
-                                : const SizedBox.shrink(),
-                          ),
+            Wrap(
+              spacing: 16,
+              children: [
+                Colors.black,
+                Colors.blue,
+                Colors.red,
+                Colors.green,
+                Colors.yellow
+              ].map(
+                (color) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        _currentColor = color;
+                      });
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        color: color,
+                        child: Center(
+                          child: _currentColor == color
+                              ? const Icon(
+                                  Icons.brush,
+                                  color: Colors.white,
+                                )
+                              : const SizedBox.shrink(),
                         ),
                       ),
-                    );
-                  },
-                ).toList(),
-              ),
+                    ),
+                  );
+                },
+              ).toList(),
             ),
             const SizedBox(height: 32),
             Slider(
